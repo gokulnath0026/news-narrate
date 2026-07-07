@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { summarizeArticle } from "../server/lib/groqClient";
+import { summarizeArticle } from "../server/lib/groqClient.js";
 
 /**
  * Vercel serverless function for POST /api/summarize

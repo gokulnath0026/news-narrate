@@ -1,6 +1,6 @@
 import express from "express";
-import { fetchArticlesByCategory } from "./lib/newsClient";
-import { summarizeArticle } from "./lib/groqClient";
+import { fetchArticlesByCategory } from "./lib/newsClient.js";
+import { summarizeArticle } from "./lib/groqClient.js";
 
 /**
  * Express app exposing the API routes. Mounted directly by server/index.ts

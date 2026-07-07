@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { fetchArticlesByCategory } from "../server/lib/newsClient";
+import { fetchArticlesByCategory } from "../server/lib/newsClient.js";
 
 /**
  * Vercel serverless function for GET /api/news

@@ -1,4 +1,4 @@
-import type { Summary } from "../../shared/types";
+import type { Summary } from "../../shared/types.js";
 
 const BASE_URL = "https://api.groq.com/openai/v1";
 const MODEL = "llama-3.3-70b-versatile";

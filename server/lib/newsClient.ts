@@ -1,4 +1,4 @@
-import type { Article } from "../../shared/types";
+import type { Article } from "../../shared/types.js";
 
 /**
  * Client for the GNews API (https://gnews.io) — free tier, no marketplace
