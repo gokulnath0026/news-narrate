@@ -260,9 +260,21 @@ pnpm format   # Format code
 
 ## 📦 Deployment
 
-This app is a single Node.js server (Express) that serves the built Vite frontend, so it deploys well to any Node hosting platform that runs a persistent server (not a serverless-only platform).
+The client is a static Vite build; the API (`GET /api/news`, `POST /api/summarize`) runs two ways depending on platform:
 
-### Railway / Render (Recommended)
+- **Railway / Render**: the Express server in `server/index.ts` serves both the static build and the API routes as one persistent process.
+- **Vercel**: `api/news.ts` and `api/summarize.ts` are Vercel serverless functions (using the same `server/lib/newsClient.ts` and `server/lib/groqClient.ts` logic), and `vercel.json` points Vercel at the `dist/public` build output with an SPA rewrite for client-side routing.
+
+Both paths read the same two env vars server-side only — never exposed to the browser.
+
+### Vercel
+
+1. Push code to GitHub
+2. Import the repository at [vercel.com/new](https://vercel.com/new) (Vite framework preset is auto-detected)
+3. Add `GNEWS_API_KEY` and `GROQ_API_KEY` as environment variables (Project Settings → Environment Variables)
+4. Deploy — `vercel.json` already sets the correct build command and output directory
+
+### Railway / Render
 
 1. Push code to GitHub
 2. Create a new service and connect the repository
@@ -273,7 +285,7 @@ This app is a single Node.js server (Express) that serves the built Vite fronten
 
 ### Other Platforms
 
-Any host that runs a long-lived Node process works: DigitalOcean App Platform, Fly.io, AWS Elastic Beanstalk, etc. Vercel/Netlify work too, but you'll need to adapt the Express server to their serverless function format since it isn't a Next.js app.
+Any host that runs a long-lived Node process also works: DigitalOcean App Platform, Fly.io, AWS Elastic Beanstalk, etc. — same setup as Railway/Render.
 
 ## 🛣️ Roadmap
 
@@ -318,7 +330,7 @@ This project is licensed under the MIT License—see LICENSE file for details.
 
 - **GNews** for news aggregation
 - **Groq** for AI-powered summaries
-- **Vercel** for Next.js and deployment
+- **Vercel** for hosting and deployment
 - **shadcn/ui** for beautiful components
 - **Framer Motion** for smooth animations
 
